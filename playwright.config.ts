@@ -1,4 +1,7 @@
 import { defineConfig, devices } from '@playwright/test';
+import 'dotenv/config'
+
+console.log(process.env.BASE_URL)
 
 export default defineConfig({
   testDir: './tests',
@@ -8,7 +11,6 @@ export default defineConfig({
   workers: process.env.CI ? 1 : undefined,
   reporter: 'html',
   use: {
-    baseURL: 'https://demo.testim.io/',
     trace: 'on-first-retry',
   },
 
