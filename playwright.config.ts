@@ -1,10 +1,9 @@
 import { defineConfig, devices } from '@playwright/test';
 import 'dotenv/config'
 
-console.log(process.env.BASE_URL)
-
 export default defineConfig({
   testDir: './tests',
+  testMatch: "**/*.spec.ts",
   fullyParallel: true,
   forbidOnly: !!process.env.CI,
   retries: process.env.CI ? 2 : 0,
