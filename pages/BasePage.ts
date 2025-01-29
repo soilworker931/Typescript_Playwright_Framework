@@ -10,6 +10,10 @@ export class BasePage {
         })
     }
 
+    public getLocator(locator: string): Locator {
+        return this.page.locator(locator);
+    }
+
     public getLocatorContainingClass(classPart: string): Locator {
         return this.page.locator(`//*[contains(@class,"${classPart}")]`);
     }
@@ -19,6 +23,6 @@ export class BasePage {
     }
 
     public getLocatorByText(text: string): Locator {
-        return this.page.locator(`//*[text()=${text}]`);
+        return this.page.locator(`//*[text()="${text}"]`);
     }
 }
