@@ -2,11 +2,6 @@ import test, { type Page } from '@playwright/test';
 import { BasePage } from './BasePage';
 import { UserCredenials } from '../testData/UserCredentials';
 
-export enum LoginField {
-  USERNAME = "Username",
-  PASSWORD = "Password"
-}
-
 export class LoginPage extends BasePage {
   public readonly username = this.getLocatorById("user-name");
   public readonly password = this.getLocatorById("password");
