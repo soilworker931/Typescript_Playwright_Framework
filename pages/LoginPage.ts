@@ -1,6 +1,6 @@
-import { Locator, type Page } from '@playwright/test';
+import test, { type Page } from '@playwright/test';
 import { BasePage } from './BasePage';
-import { format } from 'util';
+import { UserCredenials } from '../testData/UserCredentials';
 
 export enum LoginField {
   USERNAME = "Username",
@@ -8,32 +8,21 @@ export enum LoginField {
 }
 
 export class LoginPage extends BasePage {
-  private readonly _fieldPlaceholder = "//*[contains(@class,'theme__hint') and text()='%s']";
-  public readonly loginForm = this.getLocatorById("login");
-  public readonly loginField = this.getLocatorContainingClass("Login__field");
-  public readonly fieldInput = this.getLocatorContainingClass("theme__inputElement");
-  public readonly loginButton = this.loginForm.getByText("Log in", { exact: true });
-  public readonly cancelButton = this.loginForm.getByText("Cancel", { exact: true });
+  public readonly username = this.getLocatorById("user-name");
+  public readonly password = this.getLocatorById("password");
+  public readonly loginButton = this.getLocatorById("login-button");
+  public readonly errorMessage = this.getLocatorByDataTest("error");
+  public readonly closeErrorMessageButon = this.getLocatorByDataTest("error-button");
 
   constructor(readonly page: Page) {
-    super(page, "login");
+    super(page, "");
   }
 
-  public getFieldPlaceholder(field: LoginField): Locator {
-    return this.getLocator(format(this._fieldPlaceholder, field));
-  }
-
-  public getFieldInput(field: LoginField): Locator {
-    return this.loginField.filter({ has: this.getFieldPlaceholder(field) }).locator(this.fieldInput);
-  }
-
-  public async fillInCredentials(login: string, password: string): Promise<void> {
-    await this.getFieldInput(LoginField.USERNAME).fill(login);
-    await this.getFieldInput(LoginField.PASSWORD).fill(password);
-  }
-
-  public async login(login: string, password: string): Promise<void> {
-    await this.fillInCredentials(login, password);
-    await this.loginButton.click();
+  public async login({ username, password }: UserCredenials): Promise<void> {
+    await test.step(`Login with user: ${username} and password: ${username}`, async () => {
+      await this.username.fill(username);
+      await this.password.fill(password);
+      await this.loginButton.click();
+    })
   }
 }

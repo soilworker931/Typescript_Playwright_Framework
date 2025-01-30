@@ -10,6 +10,7 @@ export default defineConfig({
   workers: process.env.CI ? 1 : undefined,
   reporter: 'html',
   use: {
+    baseURL: process.env.BASE_URL,
     trace: 'on-first-retry',
   },
 

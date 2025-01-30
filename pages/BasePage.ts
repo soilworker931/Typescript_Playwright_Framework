@@ -4,9 +4,8 @@ export class BasePage {
     constructor(readonly page: Page, readonly urlPath: string) { }
 
     public async openPage(): Promise<void> {
-        const url = `${process.env.BASE_URL}/${this.urlPath}`;
-        await test.step(`Navigate to: ${url}`, async () => {
-            await this.page.goto(url);
+        await test.step(`Navigate to: ${`${process.env.BASE_URL}/${this.urlPath}`}`, async () => {
+            await this.page.goto(this.urlPath);
         })
     }
 
@@ -20,6 +19,10 @@ export class BasePage {
 
     public getLocatorById(id: string): Locator {
         return this.page.locator(`#${id}`);
+    }
+
+    public getLocatorByDataTest(dataTest: string): Locator {
+        return this.page.locator(`//*[@data-test="${dataTest}"]`);
     }
 
     public getLocatorByText(text: string): Locator {
