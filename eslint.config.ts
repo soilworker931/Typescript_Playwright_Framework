@@ -26,6 +26,7 @@ export default [
       '@typescript-eslint/no-floating-promises': 'error',
       '@typescript-eslint/explicit-function-return-type': 'error',
       'prettier/prettier': 'error',
+      'playwright/no-conditional-in-test': 'off',
     },
   },
 ];

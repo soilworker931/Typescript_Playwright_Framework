@@ -2,6 +2,7 @@ import { defineConfig, devices } from '@playwright/test';
 import 'dotenv/config';
 
 export default defineConfig({
+  timeout: 120_000,
   testDir: './tests',
   testMatch: '**/*.spec.ts',
   fullyParallel: true,

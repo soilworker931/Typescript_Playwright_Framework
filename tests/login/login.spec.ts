@@ -1,13 +1,21 @@
+import { TestTag } from '../../common/TestTag';
 import { expect, test } from '../../pageFixtures';
 import { getUserCredentials, User } from '../../testData/UserCredentials';
 import { LoginPageWordings } from '../../wordings/loginPageWordings';
 
-test.describe('Login Page', () => {
+test.describe('Login Page', { tag: TestTag.LOGIN }, () => {
+  test.describe.configure({ mode: 'parallel' });
   test.beforeEach(async ({ loginPage }) => {
     await loginPage.openPage();
   });
 
-  const usersLoginTest: User[] = [User.STANDARD_USER, User.PROBLEM_USER, User.PERFORMANCE_GLITCH_USER, User.ERROR_USER, User.VISUAL_USER];
+  const usersLoginTest: User[] = [
+    User.STANDARD_USER,
+    User.PROBLEM_USER,
+    User.PERFORMANCE_GLITCH_USER,
+    User.ERROR_USER,
+    User.VISUAL_USER,
+  ];
 
   for (const user of usersLoginTest) {
     test(`Successful Login with ${user} user`, async ({ loginPage, mainPage }) => {
