@@ -1,4 +1,4 @@
-import { expect, Locator, Page } from '@playwright/test';
+import test, { expect, Locator, Page } from '@playwright/test';
 import { BasePage } from '../pages/BasePage';
 import { ItemInfo } from '../testData/InventoryItems';
 
@@ -39,8 +39,9 @@ export class InventoryItemFragment extends BasePage {
   }
 
   public async verifyInventoryItemCard({ name, description, price }: ItemInfo): Promise<void> {
-    await expect(this.getInventoryItemName(name)).toHaveText(name);
-    await expect(this.getInventoryItemDescription(name)).toHaveText(description);
-    await expect(this.getInventoryItemPrice(name)).toHaveText(`$${price}`);
+    await expect.soft(this.getInventoryItemName(name)).toHaveText(name);
+    await expect.soft(this.getInventoryItemDescription(name)).toHaveText(description);
+    await expect.soft(this.getInventoryItemPrice(name)).toHaveText(`$${price}`);
+    expect(test.info().errors).toHaveLength(0);
   }
 }
