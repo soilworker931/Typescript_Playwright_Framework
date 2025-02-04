@@ -20,7 +20,7 @@ test.describe('Inventory Items', { tag: TestTag.LOGIN }, () => {
   test('All expected inventory items are shown in the Inventory', async ({ mainPage }) => {
     const inventoryItemFragment = mainPage.getInventoryItemFragment();
 
-    const expectedNumberOfItems = Object.keys(InventoryItem).length / 2;
+    const expectedNumberOfItems = Object.keys(InventoryItem).length;
 
     await test.step('Verify inventory items', async () => {
       await expect(inventoryItemFragment.inventoryItemCard).toHaveCount(expectedNumberOfItems);
@@ -29,13 +29,4 @@ test.describe('Inventory Items', { tag: TestTag.LOGIN }, () => {
       }
     });
   });
-
-  // test('Inventory item can be bought successfully', async ({ mainPage }) => {
-  //   const inventoryItemFragment = mainPage.getInventoryItemFragment();
-
-  //   const expectedNumberOfItems = Object.keys(InventoryItem).length / 2;
-
-  //   await test.step('Verify inventory items', async () => {
-  //   });
-  // });
 });
